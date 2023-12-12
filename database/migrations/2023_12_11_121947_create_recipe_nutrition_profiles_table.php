@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreignIdFor(NutritionProfile::class);
             $table->timestamps();
             
-            $table->foreign('recipe_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('nutrition_profile_id')->references('id')->on('houses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('nutrition_profile_id')->references('id')->on('nutrition_profiles')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

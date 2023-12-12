@@ -22,8 +22,8 @@ return new class extends Migration
             $table->foreignIdFor(Ingredient::class);
             $table->timestamps();
             
-            $table->foreign('recipe_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('ingredient_id')->references('id')->on('houses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

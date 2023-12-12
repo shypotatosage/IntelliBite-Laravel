@@ -28,6 +28,6 @@ class Recipe extends Model
     }
 
     public function steps(){
-        return $this->hasMany(RecipeStep::class);
+        return $this->hasMany(Step::class);
     }
 }

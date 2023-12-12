@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Recipe;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class RecipeController extends Controller
 {
@@ -35,9 +38,39 @@ class RecipeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Recipe $recipe)
+    public function show(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'ingredients' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Failed to fetch recipes, there is an issue in your data.',
+                'data' => ''
+            ]);
+        }
+
+        $recipes = DB::table("recipes as r")
+        ->leftjoin('recipe_ingredients as i', 'i.recipe_id', '=', 'r.id')
+        ->leftjoin('recipe_nutrition_profiles as n', 'n.recipe_id', '=', 'r.id');
+
+        foreach ($request->ingredients as $ingredient) {
+            $recipes->where('ingredient_id', '=', $ingredient);
+        }
+        
+        foreach ($request->nutrition_profiles as $nutrition_profile) {
+            $recipes->where('nutrition_profile_id', '=', $nutrition_profile);
+        }
+
+        $result = $recipes->get();
+        
+        return response()->json([
+            'status' => 200,
+            'message' => 'success',
+            'data' => $result
+        ]);
     }
 
     /**
