@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('recipe_ingredients', function (Blueprint $table) {
             $table->id();
             $table->float('quantity');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('unit');
             $table->foreignIdFor(Recipe::class);
             $table->foreignIdFor(Ingredient::class);
