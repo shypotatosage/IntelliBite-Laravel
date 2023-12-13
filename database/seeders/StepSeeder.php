@@ -18,3 +18,4 @@ class StepSeeder extends Seeder
             'recipe_id' => 1,
         ]);
 }
+}
