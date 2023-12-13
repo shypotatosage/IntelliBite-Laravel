@@ -14,6 +14,7 @@ class RecipeIngredient extends Model
         'quantity',
         'unit',
         'description',
+        'description_steps',
     ];
 
     public function recipe() : BelongsTo
