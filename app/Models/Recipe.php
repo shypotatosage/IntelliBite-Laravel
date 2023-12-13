@@ -11,7 +11,7 @@ class Recipe extends Model
     
     protected $fillable = [
         'name',
-        'making_time',
+        'making_time_in_minutes',
         'servings',
         'calories_per_portion',
         'fats_per_portion',
