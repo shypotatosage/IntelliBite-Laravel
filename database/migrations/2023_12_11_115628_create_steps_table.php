@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
+            $table->text('description');
             $table->foreignIdFor(Recipe::class);
             $table->timestamps();
             
