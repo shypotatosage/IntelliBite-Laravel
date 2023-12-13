@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->float('quantity');
             $table->string('description')->nullable();
+            $table->string('description_steps')->nullable();
             $table->string('unit');
             $table->foreignIdFor(Recipe::class);
             $table->foreignIdFor(Ingredient::class);
