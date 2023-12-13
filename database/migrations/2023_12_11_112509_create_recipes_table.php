@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('making_time_in_minutes');
             $table->integer('servings');
             $table->integer('calories_per_portion');
-            $table->integer('fat_per_portion');
-            $table->integer('protein_per_portion');
+            $table->integer('fats_per_portion');
+            $table->integer('proteins_per_portion');
             $table->integer('carbs_per_portion');
             $table->timestamps();
         });
