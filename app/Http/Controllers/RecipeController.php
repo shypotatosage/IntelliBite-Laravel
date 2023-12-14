@@ -53,19 +53,21 @@ class RecipeController extends Controller
         }
 
         $recipes = DB::table("recipes as r")
-        ->leftjoin('recipe_ingredients as i', 'i.recipe_id', '=', 'r.id')
-        ->leftjoin('recipe_nutrition_profiles as n', 'n.recipe_id', '=', 'r.id');
+            ->leftjoin('recipe_ingredients as i', 'i.recipe_id', '=', 'r.id')
+            ->leftjoin('recipe_nutrition_profiles as n', 'n.recipe_id', '=', 'r.id');
 
         foreach ($request->ingredients as $ingredient) {
             $recipes->where('ingredient_id', '=', $ingredient);
         }
-        
-        foreach ($request->nutrition_profiles as $nutrition_profile) {
-            $recipes->where('nutrition_profile_id', '=', $nutrition_profile);
+
+        if ($request->has("nutrition_profiles")) {
+            foreach ($request->nutrition_profiles as $nutrition_profile) {
+                $recipes->where('nutrition_profile_id', '=', $nutrition_profile);
+            }
         }
 
         $result = $recipes->get();
-        
+
         return response()->json([
             'status' => 200,
             'message' => 'success',

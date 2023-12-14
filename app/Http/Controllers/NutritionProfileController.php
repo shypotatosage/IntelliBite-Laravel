@@ -13,7 +13,11 @@ class NutritionProfileController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'status' => 200,
+            'message' => 'success',
+            'data' => NutritionProfile::all()
+        ]);
     }
 
     /**

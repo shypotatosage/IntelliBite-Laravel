@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\NutritionProfileController;
 use App\Http\Controllers\RecipeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/get-recipes', [RecipeController::class, 'show']);
+Route::get('/get-ingredients', [IngredientController::class, 'index']);
+Route::get('/get-nutrition-profiles', [NutritionProfileController::class, 'index']);

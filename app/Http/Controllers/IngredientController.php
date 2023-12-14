@@ -13,7 +13,11 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'status' => 200,
+            'message' => 'success',
+            'data' => Ingredient::all()
+        ]);
     }
 
     /**
