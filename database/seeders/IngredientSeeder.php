@@ -14,7 +14,32 @@ class IngredientSeeder extends Seeder
     public function run(): void
     {
         Ingredient::factory()->create([
-            'name' => 'lemon zest',
+            'name' => 'lemon',
         ]);
+
+        Ingredient::factory()->create([
+            'name' => 'olive',
+        ]);
+
+        Ingredient::factory()->create([
+            'name' => 'garlic',
+        ]);
+
+        Ingredient::factory()->create([
+            'name' => 'peppercorns',
+        ]);
+
+        Ingredient::factory()->create([
+            'name' => 'salt',
+        ]);
+
+        Ingredient::factory()->create([
+            'name' => 'salmon',
+        ]);
+
+        Ingredient::factory()->create([
+            'name' => 'parsley',
+        ]);
+
     }
 }

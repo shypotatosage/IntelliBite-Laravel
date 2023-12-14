@@ -22,5 +22,15 @@ class RecipeSeeder extends Seeder
             'proteins_per_portion'  => 13,
             'carbs_per_portion'  => 12,
         ]);
+
+        Recipe::factory()->create([
+            'name'  => 'Jerk Chicken',
+            'making_time_in_minutes'  => (3*60),
+            'servings'  => 8,
+            'calories_per_portion'  => 177,
+            'fats_per_portion'  => 7,
+            'proteins_per_portion'  => 22,
+            'carbs_per_portion'  => 5,
+        ]);
     }
 }
