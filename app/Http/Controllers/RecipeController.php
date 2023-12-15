@@ -28,27 +28,27 @@ class RecipeController extends Controller
             ]);
         }
 
-        $recipes = Recipe::with('recipe_ingredients', 'recipe_nutrition_profiles')
-        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', '=', 'recipes.id')
-        ->join('recipe_nutrition_profiles', 'recipe_nutrition_profiles.recipe_id', '=', 'recipes.id');
+        $ingredients = explode(",", $request->ingredients);
 
-        foreach ($request->ingredients as $ingredient) {
-            $recipes->where('ingredient_id', '=', $ingredient);
+        $query = Recipe::query();
+
+        foreach ($ingredients as $tag) {
+            $query->whereHas('recipe_ingredients', function ($q) use ($tag) {
+                $q->where('ingredient_id', $tag);
+            });
         }
 
         if ($request->has("nutrition_profiles")) {
-            foreach ($request->nutrition_profiles as $nutrition_profile) {
-                $recipes->where('nutrition_profile_id', '=', $nutrition_profile);
+            $nutrition_profiles = explode(",", $request->nutrition_profiles);
+
+            foreach ($nutrition_profiles as $tag) {
+                $query->whereHas('recipe_nutrition_profiles', function ($q) use ($tag) {
+                    $q->where('nutrition_profile_id', $tag);
+                });
             }
         }
 
-        $result = $recipes->get(["recipes.*"]);
-        $result = $result->unique();
-
-        foreach ($result as $res) {
-            unset($res["recipe_ingredients"]);
-            unset($res["recipe_nutrition_profiles"]);
-        }
+        $result = $query->get();
 
         return response()->json([
             'status' => 200,
