@@ -28,9 +28,9 @@ class RecipeController extends Controller
             ]);
         }
 
-        $recipes = DB::table("recipes as r")
-            ->leftjoin('recipe_ingredients as i', 'i.recipe_id', '=', 'r.id')
-            ->leftjoin('recipe_nutrition_profiles as n', 'n.recipe_id', '=', 'r.id');
+        $recipes = Recipe::with('recipe_ingredients', 'recipe_nutrition_profiles')
+        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', '=', 'recipes.id')
+        ->join('recipe_nutrition_profiles', 'recipe_nutrition_profiles.recipe_id', '=', 'recipes.id');
 
         foreach ($request->ingredients as $ingredient) {
             $recipes->where('ingredient_id', '=', $ingredient);
@@ -42,7 +42,13 @@ class RecipeController extends Controller
             }
         }
 
-        $result = $recipes->get();
+        $result = $recipes->get(["recipes.*"]);
+        $result = $result->unique();
+
+        foreach ($result as $res) {
+            unset($res["recipe_ingredients"]);
+            unset($res["recipe_nutrition_profiles"]);
+        }
 
         return response()->json([
             'status' => 200,
