@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FruitVegetableController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\NutritionProfileController;
 use App\Http\Controllers\RecipeController;
@@ -25,3 +26,4 @@ Route::post('/get-recipes', [RecipeController::class, 'index']);
 Route::get('/get-recipe/{id}', [RecipeController::class, 'show']);
 Route::get('/get-ingredients', [IngredientController::class, 'index']);
 Route::get('/get-nutrition-profiles', [NutritionProfileController::class, 'index']);
+Route::get('/get-fruitvegetables/{name}', [FruitVegetableController::class, 'show']);
