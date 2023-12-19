@@ -47,7 +47,9 @@ class Recipe extends Model
 
         foreach ($this->recipe_ingredients as $ingredient) {
             $temp = $ingredient->ingredient;
-            array_push($ingredients, $temp);
+            $ingredient["name"] = $temp["name"];
+            unset($ingredient["ingredient"]);
+            array_push($ingredients, $ingredient);
         }
 
         return $ingredients;
