@@ -45,7 +45,7 @@ class FruitVegetableController extends Controller
             ]);
         }
 
-        $result = FruitVegetable::where("name", "=", $name)->get();
+        $result = FruitVegetable::where("name", "=", $name)->first();
 
         return response()->json([
             'status' => 200,
